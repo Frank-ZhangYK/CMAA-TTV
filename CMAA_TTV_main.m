@@ -3,6 +3,7 @@
 % yuankezhang@163.com
 % 2020.8
 
+
 clear ;
 close all;
 path(path, 'tools');
@@ -21,20 +22,17 @@ A = Gtomo2_dscmex(sg, ig,'nthread', jf('ncore')*2-1);
 %% load data
 printm('Loading external sinogram, weight, fbp...');
 load ('./data/fbp_LD.fbp.mat');     % fbp with ramp filter
-xfbp = fbp_LD; clear fbp_LD;  
+xfbp = fbp_LD;  
 
 load('./data/sino_LD.sino.mat');     % sinogram data
-sino = sino_LD; clear sino_LD 
+sino = sino_LD; 
 
 load('./data/invVar_LD.invVar.mat');
-wi = invVar_LD; clear invVar_LD        % inverse of the variance
+wi = invVar_LD;                      % inverse of the variance
 
 printm('Pre-calculating denominator D_A...');
-%for i = 1:p
-%    denom(:,i) = abs(A)' * col(reshape(sum(abs(A)'), [size(wi,1),size(wi,2)]).* wi(:,:,i)); 
-%end
-load('./data/denom_LD.denom.mat');
-denomD = denom; clear denom
+load('./data/denom_LD.denom.mat');   % diag{|A^T|W|A|1}
+denomD = denom; 
 
 %% reshape data
 [imgM,imgN,p] = size(xfbp);

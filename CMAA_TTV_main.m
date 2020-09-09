@@ -10,9 +10,8 @@ path(path, 'tools');
 
 
 %% setup target geometry
-down = 1;  
 ig = image_geom('nx',256, 'ny', 256,'dx',256/256, 'offset_y',0, 'down',1);
-sg = sino_geom('ge1', 'units', 'mm', 'strip_width', 'd', 'down', down);
+sg = sino_geom('ge1', 'units', 'mm', 'strip_width', 'd', 'down', 1);
 ig.mask = ig.circ > 0;
 A = Gtomo2_dscmex(sg, ig,'nthread', jf('ncore')*2-1);
 

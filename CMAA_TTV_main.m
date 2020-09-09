@@ -15,9 +15,6 @@ ig = image_geom('nx',256, 'ny', 256,'dx',256/256, 'offset_y',0, 'down',1);
 sg = sino_geom('ge1', 'units', 'mm', 'strip_width', 'd', 'down', down);
 ig.mask = ig.circ > 0;
 A = Gtomo2_dscmex(sg, ig,'nthread', jf('ncore')*2-1);
-% if neccessary, one could modify maxNumComThreads/jf('ncore') to make full
-% use of threads of your machine to accelerate the computation of 
-% forward and back projections. 
 
 %% load data
 printm('Loading external sinogram, weight, fbp...');
